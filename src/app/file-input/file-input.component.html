@@ -1,0 +1,33 @@
+<div
+  class="dropzone"
+  fileDragDrop
+  (filesChangedEmitter)="onFilesChanged($event)"
+>
+  <!-- @ts-ignore -->
+  <input
+    (change)="onFilesChanged($event.target)"
+    type="file"
+    [name]="name"
+    [id]="id"
+    multiple
+    accept=".png,.jpeg,.jpg,.pdf"
+  />
+  <label [for]="id">
+    <div class="icon">
+      <img
+        src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 15V18H6V15H4V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V15H18ZM7 9L8.41 10.41L11 7.83V16H13V7.83L15.59 10.41L17 9L12 4L7 9Z' fill='%230070E0'/%3E%3C/svg%3E%0A"
+        alt=""
+      />
+    </div>
+    <div class="detail">
+      <span class="mobile">Upload</span>
+      <span class="desktop">
+        <img
+          src="data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.36364 20C2.98485 20 2.66288 19.8695 2.39773 19.6086C2.13258 19.3476 2 19.0307 2 18.6579V5.90789H3.36364V18.6579H19.9545V20H3.36364ZM6.09091 17.3158C5.71212 17.3158 5.39015 17.1853 5.125 16.9243C4.85985 16.6634 4.72727 16.3465 4.72727 15.9737V4.34211C4.72727 3.9693 4.85985 3.65241 5.125 3.39145C5.39015 3.13048 5.71212 3 6.09091 3H12L13.3636 4.34211H20.6364C21.0152 4.34211 21.3371 4.47259 21.6023 4.73355C21.8674 4.99452 22 5.3114 22 5.68421V15.9737C22 16.3465 21.8674 16.6634 21.6023 16.9243C21.3371 17.1853 21.0152 17.3158 20.6364 17.3158H6.09091ZM6.09091 15.9737H20.6364V5.68421H12.7955L11.4318 4.34211H6.09091V15.9737ZM6.09091 15.9737V4.34211V15.9737Z' fill='%230070E0'/%3E%3C/svg%3E%0A"
+        />
+        Drag and drop your new file here or click to browse new files
+      </span>
+      <p>Maximum file size 5 MB (png, jpeg, jpg, pdf)</p>
+    </div>
+  </label>
+</div>
