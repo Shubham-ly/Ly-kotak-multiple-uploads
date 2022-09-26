@@ -1,0 +1,85 @@
+.file-item {
+  border-radius: 2px;
+  height: 72px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f7faff;
+  border: 1px dashed #1035664d;
+  margin-top: 12px !important;
+
+  .icon {
+    border-right: 1px dashed #1035664d;
+    width: 72px;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 60px;
+    }
+  }
+
+  .detail {
+    padding: 12px;
+    flex: 1;
+    span {
+      cursor: pointer;
+      color: #0070e0;
+      font-size: 14px;
+    }
+    p {
+      color: #525252;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+  }
+
+  input {
+    display: none;
+    height: 100%;
+    width: 100%;
+  }
+
+  .remove-button {
+    cursor: pointer;
+    max-width: 24px;
+    max-height: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    margin-right: 12px;
+  }
+
+  object * {
+    user-select: none !important;
+    pointer-events: none !important;
+    overflow-y: hidden !important;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: grid;
+  place-items: center;
+
+  .preview {
+    height: 450px;
+    max-width: 450px;
+    display: grid;
+    place-items: center;
+
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+  }
+}

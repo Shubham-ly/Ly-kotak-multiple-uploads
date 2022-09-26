@@ -9,39 +9,13 @@
     (onFileChange)="dir12FilesChanged($event)"
   ></file-input>
   <div class="files-container">
-    <div class="dropzone" *ngFor="let file of dir12Files; let index = index">
-      <div class="icon">
-        <img
-          *ngIf="
-            ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
-            else showPdfPreview
-          "
-          alt=""
-          [src]="getImageDataUri(file)"
-        />
-        <ng-template #showPdfPreview>
-          <embed
-            [src]="getImageDataUri(file) + '#toolbar=0&scrollbar=0&navpanes=0'"
-            type="application/pdf"
-            height="100%"
-            width="100%"
-          />
-        </ng-template>
-      </div>
-      <div class="detail">
-        <span>{{ file.name }}</span>
-        <p>{{ formatBytes(file.size) }}</p>
-      </div>
-      <button
-        (click)="onRemoveClicked(index, 'dir12Files')"
-        class="remove-button"
-      >
-        <img
-          src="data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.6252 20V20.75C18.0394 20.75 18.3752 20.4142 18.3752 20H17.6252ZM6.37402 20H5.62402C5.62402 20.4142 5.95981 20.75 6.37402 20.75V20ZM6.37402 6.87362V6.12362C5.95981 6.12362 5.62402 6.45941 5.62402 6.87362H6.37402ZM17.6252 6.87362H18.3752C18.3752 6.45941 18.0394 6.12362 17.6252 6.12362V6.87362ZM4.49902 6.12367C4.08481 6.12367 3.74902 6.45946 3.74902 6.87367C3.74902 7.28788 4.08481 7.62367 4.49902 7.62367V6.12367ZM19.5006 7.62367C19.9148 7.62367 20.2506 7.28788 20.2506 6.87367C20.2506 6.45946 19.9148 6.12367 19.5006 6.12367V7.62367ZM14.3228 6.87374C14.3228 7.28796 14.6586 7.62374 15.0728 7.62374C15.487 7.62374 15.8228 7.28796 15.8228 6.87374H14.3228ZM15.0728 4H15.8228C15.8228 3.58579 15.487 3.25 15.0728 3.25V4ZM8.74213 4V3.25C8.32792 3.25 7.99213 3.58579 7.99213 4H8.74213ZM7.99213 6.87374C7.99213 7.28796 8.32792 7.62374 8.74213 7.62374C9.15634 7.62374 9.49213 7.28796 9.49213 6.87374H7.99213ZM17.6252 19.25H6.37402V20.75H17.6252V19.25ZM7.12402 20V6.87362H5.62402V20H7.12402ZM6.37402 7.62362H17.6252V6.12362H6.37402V7.62362ZM16.8752 6.87362V20H18.3752V6.87362H16.8752ZM4.49902 7.62367H19.5006V6.12367H4.49902V7.62367ZM15.8228 6.87374V4H14.3228V6.87374H15.8228ZM15.0728 3.25H8.74213V4.75H15.0728V3.25ZM7.99213 4V6.87374H9.49213V4H7.99213Z' fill='%239F9F9F'/%3E%3Cpath d='M10.876 9.6875C10.876 9.27329 10.5402 8.9375 10.126 8.9375C9.71176 8.9375 9.37598 9.27329 9.37598 9.6875H10.876ZM9.37598 17.1883C9.37598 17.6025 9.71176 17.9383 10.126 17.9383C10.5402 17.9383 10.876 17.6025 10.876 17.1883H9.37598ZM14.626 9.6875C14.626 9.27329 14.2902 8.9375 13.876 8.9375C13.4618 8.9375 13.126 9.27329 13.126 9.6875H14.626ZM13.126 17.1883C13.126 17.6025 13.4618 17.9383 13.876 17.9383C14.2902 17.9383 14.626 17.6025 14.626 17.1883H13.126ZM9.37598 9.6875V17.1883H10.876V9.6875H9.37598ZM13.126 9.6875V17.1883H14.626V9.6875H13.126Z' fill='%239F9F9F'/%3E%3C/svg%3E%0A"
-          alt=""
-        />
-      </button>
-    </div>
+    <file-item
+      *ngFor="let file of dir12Files; let index = index"
+      [file]="file"
+      [index]="index"
+      [key]="'dir12Files'"
+      (onDeleteClicked)="onRemoveClicked($event)"
+    ></file-item>
   </div>
 
   <h4 style="margin-top: 32px">Upload Registrar of Companies (ROC) recipt</h4>
@@ -52,38 +26,12 @@
     (onFileChange)="rocFilesChanged($event)"
   ></file-input>
   <div class="files-container">
-    <div class="dropzone" *ngFor="let file of rocFiles; let index = index">
-      <div class="icon">
-        <img
-          *ngIf="
-            ['image/png', 'image/jpg', 'image/jpeg'].includes(file.type);
-            else showPdfPreview
-          "
-          alt=""
-          [src]="getImageDataUri(file)"
-        />
-        <ng-template #showPdfPreview>
-          <object
-            [attr.data]="getImageDataUri(file)"
-            type="application/pdf"
-            width="100%"
-            height="100%"
-          ></object>
-        </ng-template>
-      </div>
-      <div class="detail">
-        <span>{{ file.name }}</span>
-        <p>{{ formatBytes(file.size) }}</p>
-      </div>
-      <button
-        (click)="onRemoveClicked(index, 'rocFiles')"
-        class="remove-button"
-      >
-        <img
-          src="data:image/svg+xml,%3Csvg width='25' height='24' viewBox='0 0 25 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.6252 20V20.75C18.0394 20.75 18.3752 20.4142 18.3752 20H17.6252ZM6.37402 20H5.62402C5.62402 20.4142 5.95981 20.75 6.37402 20.75V20ZM6.37402 6.87362V6.12362C5.95981 6.12362 5.62402 6.45941 5.62402 6.87362H6.37402ZM17.6252 6.87362H18.3752C18.3752 6.45941 18.0394 6.12362 17.6252 6.12362V6.87362ZM4.49902 6.12367C4.08481 6.12367 3.74902 6.45946 3.74902 6.87367C3.74902 7.28788 4.08481 7.62367 4.49902 7.62367V6.12367ZM19.5006 7.62367C19.9148 7.62367 20.2506 7.28788 20.2506 6.87367C20.2506 6.45946 19.9148 6.12367 19.5006 6.12367V7.62367ZM14.3228 6.87374C14.3228 7.28796 14.6586 7.62374 15.0728 7.62374C15.487 7.62374 15.8228 7.28796 15.8228 6.87374H14.3228ZM15.0728 4H15.8228C15.8228 3.58579 15.487 3.25 15.0728 3.25V4ZM8.74213 4V3.25C8.32792 3.25 7.99213 3.58579 7.99213 4H8.74213ZM7.99213 6.87374C7.99213 7.28796 8.32792 7.62374 8.74213 7.62374C9.15634 7.62374 9.49213 7.28796 9.49213 6.87374H7.99213ZM17.6252 19.25H6.37402V20.75H17.6252V19.25ZM7.12402 20V6.87362H5.62402V20H7.12402ZM6.37402 7.62362H17.6252V6.12362H6.37402V7.62362ZM16.8752 6.87362V20H18.3752V6.87362H16.8752ZM4.49902 7.62367H19.5006V6.12367H4.49902V7.62367ZM15.8228 6.87374V4H14.3228V6.87374H15.8228ZM15.0728 3.25H8.74213V4.75H15.0728V3.25ZM7.99213 4V6.87374H9.49213V4H7.99213Z' fill='%239F9F9F'/%3E%3Cpath d='M10.876 9.6875C10.876 9.27329 10.5402 8.9375 10.126 8.9375C9.71176 8.9375 9.37598 9.27329 9.37598 9.6875H10.876ZM9.37598 17.1883C9.37598 17.6025 9.71176 17.9383 10.126 17.9383C10.5402 17.9383 10.876 17.6025 10.876 17.1883H9.37598ZM14.626 9.6875C14.626 9.27329 14.2902 8.9375 13.876 8.9375C13.4618 8.9375 13.126 9.27329 13.126 9.6875H14.626ZM13.126 17.1883C13.126 17.6025 13.4618 17.9383 13.876 17.9383C14.2902 17.9383 14.626 17.6025 14.626 17.1883H13.126ZM9.37598 9.6875V17.1883H10.876V9.6875H9.37598ZM13.126 9.6875V17.1883H14.626V9.6875H13.126Z' fill='%239F9F9F'/%3E%3C/svg%3E%0A"
-          alt=""
-        />
-      </button>
-    </div>
+    <file-item
+      *ngFor="let file of rocFiles; let index = index"
+      [file]="file"
+      [index]="index"
+      [key]="'rocFiles'"
+      (onDeleteClicked)="onRemoveClicked($event)"
+    ></file-item>
   </div>
 </div>
