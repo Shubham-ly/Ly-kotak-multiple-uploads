@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as pdfjs from 'pdfjs-dist'
 
 @Component({
   selector: 'file-item',
@@ -19,6 +20,31 @@ export class FileItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.file.type === 'application/pdf') {
+      this.loadPdfPreview()
+    }
+  }
+
+  async loadPdfPreview() {
+    if (!pdfjs.GlobalWorkerOptions.workerSrc) {
+      const WORKER_URL = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${ pdfjs.version }/pdf.worker.min.js`;
+      pdfjs.GlobalWorkerOptions.workerSrc = WORKER_URL;
+    }
+    const pdf = await pdfjs.getDocument(URL.createObjectURL(this.file)).promise
+    const page = await pdf.getPage(1)
+    const viewport = page.getViewport({ scale: 0.5, offsetX: -40, offsetY: -10 })
+    const canvas = document.getElementById(`${ this.file.name }-preview`)! as HTMLCanvasElement
+    canvas.width = 70
+    canvas.height = 70
+    const context = canvas.getContext('2d')
+    const renderContext = {
+      canvasContext: context as CanvasRenderingContext2D,
+      viewport
+    }
+    const renderTask = page.render(renderContext)
+    renderTask.promise.then(() => {
+      console.log("pdf preview rendered")
+    })
   }
 
   formatBytes(bytes: number, decimals = 2) {

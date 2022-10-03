@@ -12,12 +12,12 @@ export class FileInputComponent implements OnInit {
   @Input() id: string = '';
   @Input() name: string = '';
   @Output() private onFileChange: EventEmitter<File[]> = new EventEmitter();
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onFilesChanged(data: any) {
-    let files = [];
+    let files: File[] = [];
     if (data.files) {
       files = [...data.files].filter(
         (file: File) => file.size <= FILE_SIZE_LIMIT

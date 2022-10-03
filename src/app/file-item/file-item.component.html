@@ -9,12 +9,7 @@
       [src]="getImageDataUri(file)"
     />
     <ng-template #showPdfPreview>
-      <embed
-        [src]="getPdfUrlWithPreview(file, false)"
-        type="application/pdf"
-        height="100%"
-        width="100%"
-      />
+      <canvas style="margin: 4px" [id]="file.name + '-preview'"></canvas>
     </ng-template>
   </div>
   <div class="detail">
